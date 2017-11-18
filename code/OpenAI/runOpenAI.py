@@ -1,3 +1,7 @@
+from os import path
+import sys
+sys.path.append(path.abspath('../gym'))
+
 import gym
 env = gym.make('FlyingPendulum-v0')
 # env.reset()
