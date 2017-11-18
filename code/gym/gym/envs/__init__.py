@@ -1,5 +1,13 @@
 from gym.envs.registration import registry, register, make, spec
 
+register(
+    id='FlyingPendulum-v0',
+    entry_point='gym.envs.classic_control:FlyingPendulumEnv',
+    max_episode_steps=200,
+    reward_threshold=200,
+)
+
+
 # Algorithmic
 # ----------------------------------------
 
