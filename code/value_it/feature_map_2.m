@@ -3,7 +3,7 @@ function [phi] = feature_map_2(state)
 phi_temp=[1;state];
 M=state*state';
 for ii=1:size(state)
-    phi_temp=[phi_temp;M(1:ii,ii)];
+    phi_temp=[phi_temp;M(1:ii,ii)/10];
 end
 phi=phi_temp;
 end

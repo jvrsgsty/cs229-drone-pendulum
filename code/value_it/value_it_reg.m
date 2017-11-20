@@ -104,7 +104,7 @@ title('norm of theta')
 state=[0,0,5,0,0,0,0,0,0,0.1,0,0,0]';
 states(1,:)=state;
 for i = 1:100
-    actionInd = getActionPhi(state, theta,timeStep);
+    actionInd = getActionPhi(state, theta,timeStep,gamma);
     action=ind2action(actionInd);
     newState = getSuccessor(action, states(i,:), timeStep);
     states(i+1,:) = newState;
@@ -117,3 +117,14 @@ for i = 1:100
     end
     state=newState;
 end
+figure()
+plot(states(:,10),states(:,11))
+title('COM position')
+axis equal
+figure()
+plot(states(:,1),states(:,2))
+title('Drone xy position')
+axis equal
+figure()
+plot(states(:,3))
+title('z')
