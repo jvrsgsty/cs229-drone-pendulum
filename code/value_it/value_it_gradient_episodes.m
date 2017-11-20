@@ -1,4 +1,4 @@
-%Gradien descent with regularization
+%Gradien descent with regularization over episodes
 clear;
 close all;
 L=0.6;
@@ -8,7 +8,7 @@ phiInit=feature_map_2(stateInit);
 theta=zeros(length(phiInit),1);
 dim_phi=length(phiInit);
 
-m=4000;
+m=1000;             %max length of each episode
 n_action=5^4;
 timeStep=0.01;
 gamma=0.9;         
@@ -19,14 +19,14 @@ counter=1;
 epsilon=0.1;
 
 for ep=1:n_episodes
-    r=randn(3,1)*2+[0;0;20];
-    rdot=randn(3,1)*0.5;
+    r=randn(3,1)*0.1+[0;0;20];
+    rdot=randn(3,1)*0.01;
     ang=rand(3,1)*2*pi;
-    rho=randn(2,1)*0.05;
+    rho=randn(2,1)*0.01;
     rhodot=randn(2,1)*0.01;
     clear states
     state=[r;rdot;ang;rho;rhodot];
-    for ii=1:1000
+    for ii=1:m
         states(ii,:)=state;
         q=zeros(n_action,1);
         for aa=1:n_action
@@ -45,19 +45,8 @@ for ep=1:n_episodes
         r = state(10);
         s = state(11); 
         if sqrt(r^2+s^2) > sqrt(2)/2*L 
-            disp("Episode ", ep, " over after ", ii/100, " seconds in flight")
-            close all
-            figure()
-            plot(states(:,10),states(:,11))
-            title('COM position')
-            axis equal
-            figure()
-            plot(states(:,1),states(:,2))
-            title('Drone xy position')
-            axis equal
-            figure()
-            plot(states(:,3))
-            title('z')
+            txt=['Episode ', num2str(ep), ' over after ', num2str(ii/100), ' seconds in flight'];
+            disp(txt)
             break
         end
         %Build next state
@@ -66,8 +55,7 @@ for ep=1:n_episodes
             next_action=randi(n_action);
         else next_action=as;
         end
-        state=getSuccessor(
-    
+        state=getSuccessor(ind2action(next_action),state,timeStep)';
     end
 end
 %%
