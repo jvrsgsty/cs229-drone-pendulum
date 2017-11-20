@@ -1,3 +1,8 @@
+% Using MATLAB's regression function (regress)
+%
+% CS 229
+% Stand:    11.19.2017
+
 clear;
 L=0.6;
 
@@ -9,7 +14,7 @@ dim_phi=length(phiInit);
 m=1000;
 n_action=5^4;
 timeStep=0.02;
-gamma=0.9;         
+gamma=0.9;
 alpha=0.001;        %learning rate
 n_reg=300;          %number of examples the regression is done on
 
@@ -111,8 +116,8 @@ for i = 1:100
     actions(i,:) = action;
     %rewards(i) = reward;
     r = newState(10);
-    s = newState(11); 
-    if sqrt(r^2+s^2) > sqrt(2)/2*L 
+    s = newState(11);
+    if sqrt(r^2+s^2) > sqrt(2)/2*L
         break
     end
     state=newState;
