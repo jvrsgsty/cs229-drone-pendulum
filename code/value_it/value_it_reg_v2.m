@@ -11,7 +11,7 @@ theta=zeros(length(phiInit),1);
 dim_phi=length(phiInit);
 
 n_reg=300;          %number of examples the regression is done on
-m=100*n_reg;             %needs to be multiple of n_reg
+m=50*n_reg;             %needs to be multiple of n_reg
 n_action=5^4;
 timeStep=0.01;
 gamma=0.9;         
@@ -57,7 +57,7 @@ title('norm of theta')
 %%
 clear states actions rewards
 timeStep=0.01
-state=[0,0,0,0,0,0,0,0,0,0,0,0,0]';
+state=[0,0,0,0,0,0,0,0,0,-0.01,0.01,0,0]';
 states(1,:)=state;
 for ii = 1:1000
     actionInd = getActionPhi(state, theta,timeStep,gamma);

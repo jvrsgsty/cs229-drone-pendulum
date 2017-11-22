@@ -1,4 +1,5 @@
 %Gradien descent with regularization over episodes
+%Not concluding
 clear;
 close all;
 L=0.6;
