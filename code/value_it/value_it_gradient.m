@@ -1,4 +1,8 @@
-%Gradien descent with regularization
+% Gradient descent with regularization
+%
+% CS 229
+% Stand:    11.19.2017
+
 clear;
 close all;
 L=0.6;
@@ -11,7 +15,7 @@ dim_phi=length(phiInit);
 m=1000;
 n_action=5^4;
 timeStep=0.03;
-gamma=0.9;         
+gamma=0.9;
 alpha=0.0001;        %learning rate
 lambda=.01;
 
@@ -64,8 +68,8 @@ for ii = 1:1000
     actions(ii,:) = action;
     %rewards(i) = reward;
     r = newState(10);
-    s = newState(11); 
-    if sqrt(r^2+s^2) > sqrt(2)/2*L 
+    s = newState(11);
+    if sqrt(r^2+s^2) > sqrt(2)/2*L
         ii
         break
     end

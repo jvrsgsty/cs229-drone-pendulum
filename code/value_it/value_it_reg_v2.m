@@ -5,7 +5,7 @@ clear;
 close all;
 L=0.6;
 
-stateInit=[0,0,5,0,0,0,0,0,0,0.1,0,0,0]';
+stateInit=[0,0,5,0,0,0,0,0,0,0.1,-0.01,0,0]';
 phiInit=feature_map_with_projection(stateInit);
 theta=zeros(length(phiInit),1);
 dim_phi=length(phiInit);
