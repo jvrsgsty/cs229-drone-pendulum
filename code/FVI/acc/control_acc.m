@@ -32,10 +32,10 @@ max_failures=500; % May have to modify
 % x, x_dot, theta, theta_dot represents the actual continuous state vector
 x = -0.05 + 0.1*rand(1,1);
 y = -0.05 + 0.1*rand(1,1);
-z = -0.5 + rand(1,1);
+z = -0.05 + 0.1*rand(1,1);
 x_dot = -0.5 + rand(1,1);
 y_dot = -0.5 + rand(1,1);
-z_dot = -0.5 + rand(1,1);
+z_dot = -0.5 + 1*rand(1,1);
 r = 0; 
 s = 0; 
 r_dot = 0;
@@ -73,28 +73,47 @@ while (1)
     time = [time time(end)+ timeStep];
     
     if abs(new_state(1)) > 5 || abs(new_state(2)) > 5 || ...
-            abs(new_state(3)) > 5 || time(end) > 60   ...
-             || abs(new_state(7)) > 0.3 || abs(new_state(8)) > 0.3
+           abs(new_state(3)) > 5 || abs(new_state(7)) > 0.4...
+           || abs(new_state(8)) > 0.4 || time(end) > 120
         break
     else
         state = new_state;
     end
 end
 actions;
-subplot(1,3,1)
-plot(states(1,:),states(2,:))
+subplot(2,3,1)
+plot(states(1,:),states(2,:)); hold on
+plot(states(1,1:200:end),states(2,1:200:end), 'or'); 
+plot(states(1,1), states(2,1), 'xk');hold off
 title('Drone trajectory')
 xlabel('x')
 ylabel('y')
-subplot(1,3,2)
+subplot(2,3,5)
+plot(time, states(4,:));hold on
+plot(time, states(5,:)); hold off
+title('Drone velocities')
+xlabel('x')
+ylabel('y')
+legend('x velocity', 'y velocity');
+subplot(2,3,4)
+plot(time, sqrt(states(1,:).^2 + states(2,:).^2))
+title('Distance of the drone to the origin')
+xlabel('Time')
+ylabel('Distance')
+subplot(2,3,2)
 plot(time, states(3,:))
 title('Drone altitude')
 xlabel('Time')
 ylabel('z')
-subplot(1,3,3)
+subplot(2,3,3)
 plot(states(7,:),states(8,:))
 title('Pole COM trajectory')
 xlabel('r')
 ylabel('s')
+subplot(2,3,6)
+plot(time, sqrt(states(7,:).^2 + states(7,:).^2));hold off
+title('Distance of the pole COM to the origin')
+xlabel('Time')
+ylabel('Distance')
 
 
