@@ -5,10 +5,11 @@ TOLERANCE = 0.0001;
 Gamma = 0.995;
 num_states = 10^5;
 num_actions = 4^3;
-num_features = 11;
+num_features = 16;
 num_batches = 1;
 theta = zeros(num_features,1);
 theta_rec = [theta];
+
 for batch = 1:num_batches
     % Randomly sample states
     rand_states = zeros(10,num_states);
