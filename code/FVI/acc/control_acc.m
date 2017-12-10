@@ -11,7 +11,7 @@ GAMMA = 0.995;
 
 TOLERANCE = 0.01;
 
-NO_LEARNING_THRESHOLD = 20; 
+NO_LEARNING_THRESHOLD = 20;
 
 num_actions = 4^3;
 timeStep = 0.01;
@@ -27,7 +27,7 @@ time_steps_to_failure=[];
 num_failures=0;
 time_at_start_of_current_trial=0;
 
-max_failures=500; % May have to modify  
+max_failures=500; % May have to modify
 
 % x, x_dot, theta, theta_dot represents the actual continuous state vector
 x = -0.05 + 0.1*rand(1,1);
@@ -36,8 +36,8 @@ z = -0.05 + 0.1*rand(1,1);
 x_dot = -0.5 + rand(1,1);
 y_dot = -0.5 + rand(1,1);
 z_dot = -0.5 + 1*rand(1,1);
-r = 0; 
-s = 0; 
+r = 0;
+s = 0;
 r_dot = 0;
 s_dot = 0;
 
@@ -62,7 +62,7 @@ while (1)
             V_star = q;
             action = [action_temp];
         elseif q == V_star
-            action = [action action_temp]; 
+            action = [action action_temp];
         end
     end
     size(action,2);
@@ -71,7 +71,7 @@ while (1)
     states = [states new_state'];
     actions = [actions, action(:,index)];
     time = [time time(end)+ timeStep];
-    
+
     if abs(new_state(1)) > 5 || abs(new_state(2)) > 5 || ...
            abs(new_state(3)) > 5 || abs(new_state(7)) > 0.4...
            || abs(new_state(8)) > 0.4 || time(end) > 120
@@ -81,9 +81,10 @@ while (1)
     end
 end
 actions;
+
 subplot(2,3,1)
 plot(states(1,:),states(2,:)); hold on
-plot(states(1,1:200:end),states(2,1:200:end), 'or'); 
+plot(states(1,1:200:end),states(2,1:200:end), 'or');
 plot(states(1,1), states(2,1), 'xk');hold off
 title('Drone trajectory')
 xlabel('x')
