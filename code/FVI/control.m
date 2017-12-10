@@ -11,7 +11,7 @@ GAMMA = 0.995;
 
 TOLERANCE = 0.01;
 
-NO_LEARNING_THRESHOLD = 20; 
+NO_LEARNING_THRESHOLD = 20;
 
 num_actions = 3^3;
 timeStep = 0.1;
@@ -27,7 +27,7 @@ time_steps_to_failure=[];
 num_failures=0;
 time_at_start_of_current_trial=0;
 
-max_failures=500; % May have to modify  
+max_failures=500; % May have to modify
 
 % Starting state is (0 0 0 0)
 % x, x_dot, theta, theta_dot represents the actual continuous state vector
@@ -40,8 +40,8 @@ z_dot = -0.5 + rand(1,1);
 alpha = 0;
 beta = -pi/120+pi/60*rand(1,1);
 gamma = -pi/120+pi/60*rand(1,1);
-r = 0; 
-s = 0; 
+r = 0;
+s = 0;
 r_dot = 0;
 s_dot = 0;
 
@@ -74,12 +74,12 @@ while (1)
             V_star = q;
             action = [action_temp];
         elseif q == V_star
-            action = [action action_temp]; 
+            action = [action action_temp];
         end
     end
     size(action,2)
     index = randi([1 size(action,2)],1,1);
-    new_state = getSuccessor(action(:,index), state, timeStep);    
+    new_state = getSuccessor(action(:,index), state, timeStep);
     x_rec = [x_rec new_state(1)];
     y_rec = [y_rec new_state(2)];
     z_rec = [z_rec new_state(3)];
@@ -88,7 +88,7 @@ while (1)
     r_rec = [r_rec new_state(10)];
     s_rec = [s_rec new_state(11)];
     actions = [actions, action(:,index)];
-    
+
     rew = reward(new_state);
     if abs(new_state(1)) > 5 || abs(new_state(2)) > 5 || abs(new_state(3)) > 5 %|| abs(r) > 0.3 || abs(s) > 0.3
         break
@@ -113,4 +113,4 @@ title('Pole COM trajectory')
 xlabel('r')
 ylabel('s')
 
-
+exit
