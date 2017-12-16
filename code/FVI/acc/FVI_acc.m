@@ -45,7 +45,8 @@ for batch = 1:num_batches
 
         theta_new = gradient_descent_acc(rand_states,y_states);
         theta_rec = [theta_rec theta_new];
-        check = norm(theta_new-theta)
+        check = norm(theta_new-theta);
+
         theta = theta_new;
         if check < TOLERANCE
             break
